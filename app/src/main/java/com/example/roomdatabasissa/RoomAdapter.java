@@ -1,4 +1,4 @@
-package com.example.roomdatabas2;
+package com.example.roomdatabasissa;
 
 import android.content.Context;
 import android.view.LayoutInflater;

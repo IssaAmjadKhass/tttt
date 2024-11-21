@@ -1,15 +1,16 @@
 package com.example.roomdatabasissa;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+@Entity(tableName = "course")
 public class Course {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private  String courseName;
-    private  int noOfStudent;
+    private String courseName;
+    private int noOfStudent;
 
-    public Course( String courseName, int noOfStudent) {
-
+    public Course(String courseName, int noOfStudent) {
         this.courseName = courseName;
         this.noOfStudent = noOfStudent;
     }

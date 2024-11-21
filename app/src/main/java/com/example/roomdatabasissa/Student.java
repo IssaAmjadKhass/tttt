@@ -1,7 +1,6 @@
 package com.example.roomdatabasissa;
 
 import android.graphics.Bitmap;
-
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -9,9 +8,17 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import java.util.Date;
-@Entity(foreignKeys = @ForeignKey(entity = Course.class, parentColumns = {"id"}, childColumns = {"courseId"}))
-@TypeConverters(Converter.class)
+
+@Entity(
+        foreignKeys = @ForeignKey(
+                entity = Course.class,     // The entity we are referencing (Course)
+                parentColumns = "id",      // The column in the Course table (primary key)
+                childColumns = "courseId"  // The column in the Student table that will hold the foreign key
+        )
+)
+@TypeConverters(Converter.class)  // Converters for non-standard types (Bitmap, Date, etc.)
 public class Student {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -19,10 +26,9 @@ public class Student {
     private String department;
     private Bitmap photo;  // Bitmap will be converted to byte[]
     private Date dateOfBirth;  // Date will be converted to Long
-    private int courseId;
+    private int courseId;  // Foreign key column
 
-    public Student( String name, String department, Bitmap photo, Date dateOfBirth, int courseId) {
-
+    public Student(String name, String department, Bitmap photo, Date dateOfBirth, int courseId) {
         this.name = name;
         this.department = department;
         this.photo = photo;
@@ -30,7 +36,7 @@ public class Student {
         this.courseId = courseId;
     }
 
-
+    // Getters and setters
     public int getId() {
         return id;
     }

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         AddRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, com.example.roomdatabas2.Rec_Room.class);
+                Intent intent = new Intent(MainActivity.this, Rec_Room.class);
                 startActivity(intent);
             }
         });

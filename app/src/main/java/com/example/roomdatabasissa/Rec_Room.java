@@ -1,4 +1,4 @@
-package com.example.roomdatabas2;
+package com.example.roomdatabasissa;
 
 import android.os.Bundle;
 
@@ -32,7 +32,7 @@ public class Rec_Room extends AppCompatActivity {
         LiveData<List<Course>> coursses = myRepository.getAllCourse();
 
         // Set up the RecyclerView and adapter
-        com.example.roomdatabas2.RoomAdapter roomAdapter = new com.example.roomdatabas2.RoomAdapter(this);
+        RoomAdapter roomAdapter = new RoomAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(roomAdapter);
 

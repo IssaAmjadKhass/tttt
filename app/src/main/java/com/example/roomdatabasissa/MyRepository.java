@@ -7,15 +7,11 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class MyRepository {
-
-
     private StudentDao studentDao;
     private CourseDao courseDao;
 
-
     public MyRepository(Application application) {
         DataBas db = DataBas.getDatabase(application);
-
         studentDao = db.studentDao();
         courseDao = db.courseDao();
     }

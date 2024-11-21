@@ -7,32 +7,24 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-@Database(entities = {Student.class, Course.class}, version = 1, exportSchema = false)
-@TypeConverters(Converter.class)  // Register the Converter class globally
+@Database(entities = {Course.class, Student.class}, version = 1)
 public abstract class DataBas extends RoomDatabase {
-
-    public abstract StudentDao studentDao();
+    private static DataBas INSTANCE;
 
     public abstract CourseDao courseDao();
+    public abstract StudentDao studentDao();
 
-    private static volatile DataBas INSTANCE;
-    private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    // إضافة متغير Static للـ Executor
+    static final Executor databaseWriteExecutor = Executors.newFixedThreadPool(4);
 
-    static DataBas getDatabase(final Context context) {
+    public static synchronized DataBas getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (DataBas.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    DataBas.class, "my_database")
-                            .fallbackToDestructiveMigration()
-                            .build();
-                }
-            }
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            DataBas.class, "room_database")
+                    .build();
         }
         return INSTANCE;
     }
